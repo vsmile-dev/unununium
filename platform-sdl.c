@@ -57,7 +57,12 @@ void *open_eeprom(const char *name, u8 *data, u32 len)
 	if (!home)
 		fatal("cannot find HOME\n");
 	snprintf(path, sizeof path, "%s/.unununium", home);
-	mkdir(path, 0777);
+#ifdef _WIN32
+	_mkdir(path);
+#else
+    mkdir(path, 0777);
+#endif
+
 	snprintf(path, sizeof path, "%s/.unununium/%s.eeprom", home, name);
 
 	fp = fopen(path, "rb");

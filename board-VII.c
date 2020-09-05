@@ -98,9 +98,9 @@ static u8 uart_recv(void)
 
 		controller_input[0] = buttons;
 
-		u32 x = random() & 0x3ff;
-		u32 y = random() & 0x3ff;
-		u32 z = random() & 0x3ff;
+		u32 x = rand() & 0x3ff;
+		u32 y = rand() & 0x3ff;
+		u32 z = rand() & 0x3ff;
 
 		controller_input[1] = x;
 		controller_input[2] = y;

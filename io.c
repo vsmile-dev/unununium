@@ -437,7 +437,7 @@ u16 io_load(u32 addr)
 		break;
 
 	case 0x3d2c: case 0x3d2d:	// PRNG
-		return random();
+		return rand();
 
 	case 0x3d2f:			// DS
 		return get_ds();

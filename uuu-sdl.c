@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 	CGSReleaseObj(propertyString);
 #endif
 
-	srandom(time(0));
+	srand(time(0));
 
 	emu();
 

@@ -45,7 +45,16 @@ else()
 endif()
 
 if (USE_DEBUG)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DUSE_DEBUG)")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DUSE_DEBUG")
+endif()
+
+if (APPLE)
+    set(SOURCES ${SOURCES} dialog-cocoa.m)
+
+    find_library(APPLICATION_SERVICES_LIBRARY ApplicationServices REQUIRED)
+    find_library(COCOA_LIBRARY Cocoa REQUIRED)
+
+    set(LIBRARIES ${LIBRARIES} ${APPLICATION_SERVICES_LIBRARY} ${COCOA_LIBRARY})
 endif()
 
 add_executable(uuu-sdl ${SOURCES})

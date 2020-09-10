@@ -16,11 +16,11 @@
 
 
 #ifdef __APPLE__
-void CGSSetConnectionProperty(int, int, int, int);
+#include <ApplicationServices/ApplicationServices.h>
+
+void CGSSetConnectionProperty(int, int, CFStringRef , CFBooleanRef);
 int _CGSDefaultConnection();
-int CGSCreateCString(char *);
-int CGSCreateBoolean(unsigned char);
-void CGSReleaseObj(int);
+CFStringRef propertyString;
 #endif
 
 
@@ -46,10 +46,10 @@ int main(int argc, char *argv[])
 
 #ifdef __APPLE__
 	// Hack to speed up display refresh
-	int propertyString = CGSCreateCString("DisableDeferredUpdates");
+	propertyString = CFStringCreateWithCString(NULL, "DisableDeferredUpdates", kCFStringEncodingUTF8);
 	int cid = _CGSDefaultConnection();
-	CGSSetConnectionProperty(cid, cid, propertyString, CGSCreateBoolean(1));
-	CGSReleaseObj(propertyString);
+	CGSSetConnectionProperty(cid, cid, propertyString, kCFBooleanTrue);
+	CFRelease(propertyString);
 #endif
 
 	srand(time(0));
